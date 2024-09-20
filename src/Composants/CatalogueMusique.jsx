@@ -16,7 +16,7 @@ export default function CatalogueMusique(){
     }
 
     //fonction ajouter Musique
-    // eslint-disable-next-line no-unused-vars
+
     function ajouterMusique(event) {
         event.preventDefault();
         const formData = new FormData(event.target)
