@@ -7,13 +7,13 @@ export default function CatalogueMusique(){
     const [etatZik, setZik] = useState(catalogueMusiques);
 
     //etat isEditing
-    //const [isEditing, setIsEditing] = useState(true)
+    const [isEditing, setIsEditing] = useState(true)
 
-    // //fonction pour etat de isEditing
-    // function handleToggleEditing() {
-    //     setIsEditing((oldEditing) => !oldEditing);
-    //
-    // }
+    // fonction pour etat de isEditing
+    function handleToggleEditing() {
+        setIsEditing((oldEditing) => !oldEditing);
+
+    }
 
     //fonction ajouter Musique
     // eslint-disable-next-line no-unused-vars
@@ -21,22 +21,27 @@ export default function CatalogueMusique(){
         event.preventDefault();
         const formData = new FormData(event.target)
         console.log(formData)
-        const nouvelleLoc = {
+        const nouvelleMusique = {
             id:catalogueMusiques.length + 1,
             nom:formData.get("nom"),
             src:formData.get("src"),
-            date:new Date(formData.get("date"))
+            auteur:formData.get("auteur"),
+            prix:formData.get("date"),
+            date:new Date(formData.get("date"),
+
+    )
+
         }
-        console.log(nouvelleLoc);
-        setZik([nouvelleLoc,...etatZik])
+        console.log(nouvelleMusique);
+        setZik([nouvelleMusique,...etatZik])
     }
 
     return(
         <>
-            {/*<div>*/}
-            {/*    <input type="checkbox" id={"edit-mode"} onClick={handleToggleEditing}/>*/}
-            {/*    <label htmlFor={"edit-mode"}>Mode edition</label>*/}
-            {/*</div>*/}
+            <div>
+                <input type="checkbox" id={"edit-mode"} onClick={handleToggleEditing}/>
+                <label htmlFor={"edit-mode"}>Mode edition</label>
+            </div>
             <div className={"catalogue"}>
                 {etatZik.map(etatZik => {
                     return (
@@ -51,21 +56,25 @@ export default function CatalogueMusique(){
                 })}
 
             </div>
-            {/*<div className={"divclass"}>*/}
-            {/*    /!*affichage conditionnel*!/*/}
-            {/*    {isEditing && (*/}
-            {/*        <form onSubmit={ajouterMusique}>*/}
-            {/*            <label htmlFor="nom">Nom de la location:</label><br/>*/}
-            {/*            <input type="text" id="nom" name="nom"/><br/>*/}
-            {/*            <label htmlFor="src">Src de image:</label><br/>*/}
-            {/*            <input type="text" id="src" name="src"/><br/>*/}
-            {/*            <label htmlFor="date">Date :</label><br/>*/}
-            {/*            <input type="date" id="date" name="date"/><br/>*/}
-            {/*            <button type='submit'>Ajouter la nouvelle musique</button>*/}
-            {/*        </form>*/}
-            {/*    )*/}
-            {/*    }*/}
-            {/*</div>*/}
+            <div className={"divclass"}>
+                {/*affichage conditionnel*/}
+                {isEditing && (
+                    <form onSubmit={ajouterMusique}>
+                        <label htmlFor="nom">Nom de la musique:</label><br/>
+                        <input type="text" id="nom" name="nom"/><br/>
+                        <label htmlFor="src">Src de image:</label><br/>
+                        <input type="text" id="src" name="src"/><br/>
+                        <label htmlFor="date">Date :</label><br/>
+                        <input type="date" id="date" name="date"/><br/>
+                        <label htmlFor="auteur">Auteur :</label><br/>
+                        <input type="text" id="auteur" name="auteur"/><br/>
+                        <label htmlFor="prix">Prix :</label><br/>
+                        <input type="text" id="prix" name="prix"/><br/>
+                        <button type='submit'>Ajouter la nouvelle musique</button>
+                    </form>
+                )
+                }
+            </div>
         </>
     )
 }

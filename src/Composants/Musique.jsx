@@ -1,11 +1,13 @@
-export default function Musique({dateDeCreation, nom, auteur, id, prix, src}) {
+// eslint-disable-next-line react/prop-types
+export default function Musique({src, nom, date, auteur, prix}) {
 
     return (
         <>
-            <div>
+            <div className="carte">
                 <img src={src}/>
-                <p>{auteur}-{nom}</p>
-                <p>date de sortis : {dateDeCreation}</p>
+                <p>{auteur} - {nom}</p>
+                {/* eslint-disable-next-line react/prop-types */}
+                <p>date de sortis : {date.toLocaleDateString()}</p>
                 <p>Genre : </p>
                 <p>prix suggéré = {prix}</p>
             </div>
@@ -15,3 +17,6 @@ export default function Musique({dateDeCreation, nom, auteur, id, prix, src}) {
 
 
 }
+
+
+

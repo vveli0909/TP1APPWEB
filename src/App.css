@@ -40,3 +40,39 @@
 .read-the-docs {
   color: #888;
 }
+
+/*pour les images*/
+.catalogue {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 20px; /* Ajoute de l'espace entre les cartes */
+}
+
+.carte {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px; /* Réduit l'espace à l'intérieur des cartes */
+  width: 200px; /* Ajuste la largeur des cartes */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto; /* Laisse la hauteur s'ajuster au contenu */
+}
+
+.carte img {
+  width: 100%;
+  height: 150px; /* Diminue la hauteur de l'image */
+  object-fit: cover; /* Assure que l'image est bien cadrée à l'intérieur de la carte */
+  border-radius: 8px;
+}
+
+.carte p {
+  font-size: 14px; /* Réduit légèrement la taille du texte */
+  margin: 5px 0; /* Réduit l'espacement entre les paragraphes */
+}
