@@ -1,5 +1,5 @@
 // eslint-disable-next-line react/prop-types
-export default function Musique({src, nom, date, auteur, prix}) {
+export default function Musique({src, nom, date, auteur, prix,genre}) {
 
     return (
         <>
@@ -8,7 +8,7 @@ export default function Musique({src, nom, date, auteur, prix}) {
                 <p>{auteur} - {nom}</p>
                 {/* eslint-disable-next-line react/prop-types */}
                 <p>date de sortis : {date.toLocaleDateString()}</p>
-                <p>Genre : </p>
+                <p>Genre : {genre}</p>
                 <p>prix suggéré = {prix}</p>
             </div>
 
