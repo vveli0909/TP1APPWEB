@@ -26,7 +26,7 @@ export default function CatalogueMusique(){
             nom:formData.get("nom"),
             src:formData.get("src"),
             auteur:formData.get("auteur"),
-            prix:formData.get("date"),
+            prix:formData.get("prix"),
             date:new Date(formData.get("date"),
 
     )
@@ -34,24 +34,35 @@ export default function CatalogueMusique(){
         }
         console.log(nouvelleMusique);
         setZik([nouvelleMusique,...etatZik])
+
+        //Desactive mode edition
+        setIsEditing(false);
+    }
+
+    // fonction supprimer musique
+    function supprimerMusique(id){
+        setZik((etatZik) => etatZik.filter(musique => musique.id !==id));
     }
 
     return(
         <>
-            <div>
-                <input type="checkbox" id={"edit-mode"} onClick={handleToggleEditing}/>
-                <label htmlFor={"edit-mode"}>Mode edition</label>
-            </div>
             <div className={"catalogue"}>
                 {etatZik.map(etatZik => {
                     return (
-                        <Musique
-                            key={etatZik.id}
-                            date={etatZik.date}
-                            nom={etatZik.nom}
-                            src={etatZik.src}
-                            auteur={etatZik.auteur}
-                            prix={etatZik.prix}></Musique>
+                        <div key={etatZik.id}>
+
+                            <Musique
+                                key={etatZik.id}
+                                date={etatZik.date}
+                                nom={etatZik.nom}
+                                src={etatZik.src}
+                                auteur={etatZik.auteur}
+                                prix={etatZik.prix}></Musique>
+                            <button onClick={() => supprimerMusique(etatZik.id)}>Supprimer</button>
+                            <button onClick={handleToggleEditing}>Ajouter</button>
+                        </div>
+
+
                     )
                 })}
 
