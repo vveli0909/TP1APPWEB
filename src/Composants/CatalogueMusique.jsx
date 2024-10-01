@@ -14,35 +14,55 @@ export default function CatalogueMusique() {
     // eslint-disable-next-line no-unused-vars
     const [selectedGenre, setSelectedGenre] = useState('');
 
+    // etat pour modifier une musique
+    // eslint-disable-next-line no-unused-vars
+    const [musiqueActuelle, setMusiqueActuelle] = useState(null);
+
     // fonction pour etat de isEditing
-    function handleToggleEditing() {
+    function handleToggleEditing(musique) {
         setIsEditing((oldEditing) => !oldEditing);
+        setMusiqueActuelle(musique)
+        setSelectedGenre(musique.genre)
 
     }
 
 
     //fonction ajouter Musique
 
-    function ajouterMusique(event) {
+    function ajouterOuModifierMusique(event) {
         event.preventDefault();
         const formData = new FormData(event.target)
         console.log(formData)
         const nouvelleMusique = {
-            id: catalogueMusiques.length + 1,
+            id: musiqueActuelle ? musiqueActuelle.id : etatZik.length + 1,
             nom: formData.get("nom"),
             src: formData.get("src"),
             auteur: formData.get("auteur"),
             prix: formData.get("prix"),
+            genre: selectedGenre,
             date: new Date(formData.get("date"),
             )
 
-        }
-        console.log(nouvelleMusique);
-        setZik([nouvelleMusique, ...etatZik])
 
+        };
+        console.log(selectedGenre)
+
+        if (musiqueActuelle) {
+            setZik(
+                etatZik.map((musique) =>
+                    musique.id === musiqueActuelle.id ? nouvelleMusique : musique
+                )
+            );
+        } else {
+            setZik([nouvelleMusique, ...etatZik])
+        }
         //Desactive mode edition
         setIsEditing(false);
+        setMusiqueActuelle(null);//reinitialise la musique actuelle
+        setSelectedGenre('');//reinitialise le genre selectionne
+
     }
+
 
     // fonction supprimer musique
     function supprimerMusique(id) {
@@ -51,6 +71,9 @@ export default function CatalogueMusique() {
 
     return (
         <>
+            <div>
+                <button onClick={() => handleToggleEditing()}>Ajouter</button>
+            </div>
             <div className={"catalogue"}>
                 {etatZik.map(etatZik => {
                     return (
@@ -65,36 +88,45 @@ export default function CatalogueMusique() {
                                 prix={etatZik.prix}
                                 genre={etatZik.genre}></Musique>
                             <button onClick={() => supprimerMusique(etatZik.id)}>Supprimer</button>
-                            <button onClick={handleToggleEditing}>Ajouter</button>
+                            <button onClick={() => handleToggleEditing(etatZik)}>Modifier</button>
                         </div>
 
 
                     )
                 })}
 
+
             </div>
             <div className={"divclass"}>
                 {isEditing && (
-                    <form onSubmit={ajouterMusique}>
+                    <form onSubmit={ajouterOuModifierMusique}>
                         <label htmlFor="nom">Nom de la musique:</label>
-                        <input type="text" id="nom" name="nom" placeholder="Entrez le nom de la musique"/>
+                        <input type="text" id="nom" name="nom" defaultValue={musiqueActuelle ? musiqueActuelle.nom : ""}
+                               placeholder="Entrez le nom de la musique"/>
 
                         <label htmlFor="src">Src Image:</label>
-                        <input type="text" id="src" name="src" placeholder="Entrez le lien de l'image"/>
+                        <input type="text" id="src" name="src" defaultValue={musiqueActuelle ? musiqueActuelle.src : ""}
+                               placeholder="Entrez le lien de l'image"/>
 
                         <label htmlFor="date">Date :</label>
-                        <input type="date" id="date" name="date"/>
+                        <input type="date" id="date" name="date"
+                               defaultValue={musiqueActuelle ? musiqueActuelle.date.toLocaleDateString() : ""}/>
 
                         <label htmlFor="auteur">Auteur :</label>
-                        <input type="text" id="auteur" name="auteur" placeholder="Entrez le nom de l'auteur"/>
+                        <input type="text" id="auteur" name="auteur"
+                               defaultValue={musiqueActuelle ? musiqueActuelle.auteur : ""}
+                               placeholder="Entrez le nom de l'auteur"/>
 
                         <label htmlFor="prix">Prix :</label>
-                        <input type="text" id="prix" name="prix" placeholder="Prix suggéré"/>
+                        <input type="text" id="prix" name="prix"
+                               defaultValue={musiqueActuelle ? musiqueActuelle.prix : ""} placeholder="Prix suggéré"/>
 
                         {/* Sous-composant pour sélectionner le genre */}
-                        <GenreMusique onGenreChange={setSelectedGenre}/>
+                        <GenreMusique oneGenreChange={setSelectedGenre} genreInitial={selectedGenre}/>
 
-                        <button type="submit">Ajouter la nouvelle musique</button>
+                        <button type="submit">
+                            {musiqueActuelle ? "Modifier la musique" : "Ajouter la nouvelle musique"}
+                        </button>
                     </form>
                 )}
             </div>

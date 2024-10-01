@@ -1,19 +1,26 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
+
 
 //sous composant pour le genre de musique
 // eslint-disable-next-line react/prop-types
-export default function GenreMusique({oneGenreChange}){
+export default function GenreMusique({oneGenreChange, genreInitial}) {
 
-    //etat genre
-    const [genre , setGenre] = useState('');
+    //etat genre initialise avexc la valeur pase en prop si presente
+    const [genre, setGenre] = useState(genreInitial || '');
+
+    //synchroniser l'etat local avec la prop
+    useEffect(() => {
+        setGenre(genreInitial || '');
+    }, [genreInitial]);
 
     //modifier genre
-    function handleGenreChange(event){
+    function handleGenreChange(event) {
         const selectedGenre = event.target.value;
         setGenre(selectedGenre);
         oneGenreChange(selectedGenre);//composant parent
     }
-    return(
+
+    return (
         <div>
             <label htmlFor="genre">Genre de la musique:</label><br/>
             <select id="genre" value={genre} onChange={handleGenreChange}>
