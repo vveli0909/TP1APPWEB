@@ -2,8 +2,13 @@ import {catalogueMusiques} from "../Scripts/catalogueMusiques.js";
 import {useState} from "react";
 import Musique from "./Musique.jsx";
 import GenreMusique from "./GenreMusique.jsx";
+import {ThemeContext} from "./ThemeContext.jsx";
+import {useContext} from "react";
 
 export default function CatalogueMusique() {
+
+    //Context Musique
+    const theme = useContext(ThemeContext)
     //etat Musique
     const [etatZik, setZik] = useState(catalogueMusiques);
 
@@ -77,7 +82,7 @@ export default function CatalogueMusique() {
             <div className={"catalogue"}>
                 {etatZik.map(etatZik => {
                     return (
-                        <div key={etatZik.id}>
+                        <div key={etatZik.id} className={theme}>
 
                             <Musique
                                 key={etatZik.id}

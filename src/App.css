@@ -76,3 +76,73 @@
   font-size: 14px; /* Réduit légèrement la taille du texte */
   margin: 5px 0; /* Réduit l'espacement entre les paragraphes */
 }
+.catalogue {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.musique {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 250px; /* Largeur fixe pour garantir une taille égale */
+  text-align: center;
+}
+
+.musique img {
+  max-width: 100%; /* S'assure que l'image ne dépasse pas le conteneur */
+  height: auto;
+  border-radius: 5px;
+}
+
+.musique h2 {
+  font-size: 1.25rem;
+  margin: 12px 0;
+}
+
+.musique p {
+  margin: 6px 0;
+}
+button {
+  margin-top: 10px;
+}
+form {
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 20px auto; /* Centrer le formulaire */
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+form input, form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+form button:hover {
+  background-color: #0056b3;
+}
+.cardZik {
+  background-color: darkGray;
+  color: Yellow;
+}
