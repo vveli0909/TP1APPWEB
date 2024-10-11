@@ -3,6 +3,7 @@ import { CritiqueContext } from "./CritiqueContext";
 import CritiqueForm from "./CritiqueForm";
 import CritiqueItem from "./CritiqueItem";
 
+
 export default function CritiqueCatalogue({ musiqueState }) {
     const [critiques, setCritiques] = useState(() => {
         const storedCritiques = localStorage.getItem("critiques");

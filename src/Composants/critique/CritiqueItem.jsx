@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { CritiqueContext } from "./CritiqueContext";
 
+
 export default function CritiqueItem({ critique, musique }) {
     const { supprimerCritique } = useContext(CritiqueContext);
 

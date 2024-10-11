@@ -67,7 +67,7 @@ button:focus-visible {
   }
 }
 /*commentaire normal*/
-.comment {
+.critique-item {
   background-color: #f9f9f9; /* Fond clair pour le commentaire */
   border: 1px solid #ddd; /* Bordure subtile */
   border-radius: 8px; /* Coins arrondis */
@@ -100,6 +100,7 @@ button:focus-visible {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile pour ajouter de la profondeur */
   cursor: pointer; /* Curseur de main pour l'indication de clic */
   transition: all 0.3s ease; /* Transition douce pour plusieurs propriétés */
+  margin: 25px;
 }
 
 .add-comment-button:hover {
@@ -112,6 +113,7 @@ button:focus-visible {
   border-left: 5px solid #ffd700;
 }
 
-.comment button {
-  margin-right: 5px;
+.critique-item button {
+  background-color:red;
+
 }

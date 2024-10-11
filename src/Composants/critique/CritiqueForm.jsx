@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { CritiqueContext } from "./CritiqueContext";
 
+
 export default function CritiqueForm({ musiqueState }) {
     const { ajouterCritique } = useContext(CritiqueContext);
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ export default function CritiqueForm({ musiqueState }) {
         lyric: 0,
         cover: 0,
     });
+    const [isEditing, setIsEditing] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,11 +27,20 @@ export default function CritiqueForm({ musiqueState }) {
         });
         setFormData({ idMusique: "", flow: 0, lyric: 0, cover: 0 });
     };
+    function handleToggleEditing() {
+        setIsEditing((old) => !old);
+    }
 
     return (
+        <>
+        <button className="add-comment-button" onClick={handleToggleEditing}>
+            +
+        </button>
+    {isEditing && (
+
         <form onSubmit={handleSubmit} className="critique-form">
-            <select
-                name="idMusique"
+        <select
+            name="idMusique"
                 value={formData.idMusique}
                 onChange={handleChange}
                 required
@@ -82,5 +93,8 @@ export default function CritiqueForm({ musiqueState }) {
             </div>
             <button type="submit">Ajouter la critique</button>
         </form>
+
+    )}
+        </>
     );
 }
