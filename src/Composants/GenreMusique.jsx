@@ -17,7 +17,9 @@ export default function GenreMusique({oneGenreChange, genreInitial}) {
     function handleGenreChange(event) {
         const selectedGenre = event.target.value;
         setGenre(selectedGenre);
-        oneGenreChange(selectedGenre);//composant parent
+        oneGenreChange(selectedGenre);
+        console.log(selectedGenre)//composant parent
+
     }
 
     return (

@@ -66,3 +66,52 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+/*commentaire normal*/
+.comment {
+  background-color: #f9f9f9; /* Fond clair pour le commentaire */
+  border: 1px solid #ddd; /* Bordure subtile */
+  border-radius: 8px; /* Coins arrondis */
+  padding: 20px; /* Espacement interne */
+  margin: 20px; /* Espacement autour du commentaire et centrage automatique */
+  max-width: 600px; /* Largeur maximale pour éviter que le commentaire ne soit trop large */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Légère ombre */
+  display: inline-block; /* Ajuste la largeur de la div au contenu */
+}
+
+
+.comment-form {
+  border: 2px solid #3498db; /* Couleur bleue pour la bordure */
+  border-radius: 10px; /* Arrondir les coins de la bordure */
+  max-width: 200px;
+  padding: 15px;
+  margin: 10px;
+}
+
+.add-comment-button {
+  background: linear-gradient(135deg, #4c8bf5, #0066cc); /* Gradient pour un effet plus dynamique */
+  color: white; /* Couleur du texte */
+  border: 2px solid #0056b3; /* Ajout d'une bordure fine */
+  border-radius: 12px; /* Coins légèrement arrondis pour un style plus moderne */
+  width: 50px; /* Largeur un peu plus grande */
+  height: 50px; /* Hauteur également augmentée */
+  font-size: 1.2em; /* Taille du texte légèrement réduite */
+  text-align: center; /* Centrage du texte */
+  line-height: 46px; /* Ajustement de l'alignement vertical */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile pour ajouter de la profondeur */
+  cursor: pointer; /* Curseur de main pour l'indication de clic */
+  transition: all 0.3s ease; /* Transition douce pour plusieurs propriétés */
+}
+
+.add-comment-button:hover {
+  background: linear-gradient(135deg, #007bff, #003d99); /* Gradient plus intense au survol */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Augmentation de l'ombre au survol */
+  transform: translateY(-2px); /* Légère élévation pour donner un effet de clic */
+}
+.comment.pinned {
+  background-color: #ffffd0;
+  border-left: 5px solid #ffd700;
+}
+
+.comment button {
+  margin-right: 5px;
+}

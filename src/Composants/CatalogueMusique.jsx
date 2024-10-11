@@ -1,39 +1,43 @@
-import {catalogueMusiques} from "../Scripts/catalogueMusiques.js";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Musique from "./Musique.jsx";
 import GenreMusique from "./GenreMusique.jsx";
 import {ThemeContext} from "./ThemeContext.jsx";
 import {useContext} from "react";
 
-export default function CatalogueMusique() {
+
+// eslint-disable-next-line react/prop-types
+export default function CatalogueMusique({musiqueState}) {
 
     //Context Musique
-    const theme = useContext(ThemeContext)
-    //etat Musique
-    const [etatZik, setZik] = useState(catalogueMusiques);
+    const themeMusique = useContext(ThemeContext)
+
+    // État des musiques
+    const [etatZik, setZik] = musiqueState
 
     //etat isEditing
     const [isEditing, setIsEditing] = useState(false)
 
     // état pour stocker le genre de la musique sélectionnée
-    // eslint-disable-next-line no-unused-vars
     const [selectedGenre, setSelectedGenre] = useState('');
 
     // etat pour modifier une musique
-    // eslint-disable-next-line no-unused-vars
     const [musiqueActuelle, setMusiqueActuelle] = useState(null);
 
-    // fonction pour etat de isEditing
+
+    // Sauvegarder `etatZik` dans localStorage à chaque changement
+    useEffect(() => {
+        localStorage.setItem("etatZik", JSON.stringify(etatZik));
+    }, [etatZik]);
+
+
+    // fonction pour etat edition
     function handleToggleEditing(musique) {
         setIsEditing((oldEditing) => !oldEditing);
         setMusiqueActuelle(musique)
-        setSelectedGenre(musique.genre)
-
     }
 
 
-    //fonction ajouter Musique
-
+    //fonction ajouter ou modifier Musique
     function ajouterOuModifierMusique(event) {
         event.preventDefault();
         const formData = new FormData(event.target)
@@ -45,13 +49,13 @@ export default function CatalogueMusique() {
             auteur: formData.get("auteur"),
             prix: formData.get("prix"),
             genre: selectedGenre,
-            date: new Date(formData.get("date"),
+            date: new Date(formData.get("date")
             )
 
 
         };
-        console.log(selectedGenre)
 
+        //verifie si modifier ou ajouter
         if (musiqueActuelle) {
             setZik(
                 etatZik.map((musique) =>
@@ -61,6 +65,7 @@ export default function CatalogueMusique() {
         } else {
             setZik([nouvelleMusique, ...etatZik])
         }
+
         //Desactive mode edition
         setIsEditing(false);
         setMusiqueActuelle(null);//reinitialise la musique actuelle
@@ -76,13 +81,10 @@ export default function CatalogueMusique() {
 
     return (
         <>
-            <div>
-                <button onClick={() => handleToggleEditing()}>Ajouter</button>
-            </div>
             <div className={"catalogue"}>
                 {etatZik.map(etatZik => {
                     return (
-                        <div key={etatZik.id} className={theme}>
+                        <div key={etatZik.id} className={themeMusique}>
 
                             <Musique
                                 key={etatZik.id}
@@ -99,23 +101,25 @@ export default function CatalogueMusique() {
 
                     )
                 })}
-
-
             </div>
-            <div className={"divclass"}>
+            <div>
+                <button onClick={() => handleToggleEditing()}>Ajouter une nouvelle musique</button>
+            </div>
+            <div className={"formulaire"}>
                 {isEditing && (
                     <form onSubmit={ajouterOuModifierMusique}>
                         <label htmlFor="nom">Nom de la musique:</label>
-                        <input type="text" id="nom" name="nom" defaultValue={musiqueActuelle ? musiqueActuelle.nom : ""}
+                        <input type="text" id="nom" name="nom"
+                               defaultValue={musiqueActuelle ? musiqueActuelle.nom : ""}
                                placeholder="Entrez le nom de la musique"/>
 
                         <label htmlFor="src">Src Image:</label>
-                        <input type="text" id="src" name="src" defaultValue={musiqueActuelle ? musiqueActuelle.src : ""}
+                        <input type="text" id="src" name="src"
+                               defaultValue={musiqueActuelle ? musiqueActuelle.src : ""}
                                placeholder="Entrez le lien de l'image"/>
 
                         <label htmlFor="date">Date :</label>
-                        <input type="date" id="date" name="date"
-                               defaultValue={musiqueActuelle ? musiqueActuelle.date.toLocaleDateString() : ""}/>
+                        <input type="date" id="date" name="date"/>
 
                         <label htmlFor="auteur">Auteur :</label>
                         <input type="text" id="auteur" name="auteur"
@@ -124,7 +128,8 @@ export default function CatalogueMusique() {
 
                         <label htmlFor="prix">Prix :</label>
                         <input type="text" id="prix" name="prix"
-                               defaultValue={musiqueActuelle ? musiqueActuelle.prix : ""} placeholder="Prix suggéré"/>
+                               defaultValue={musiqueActuelle ? musiqueActuelle.prix : ""}
+                               placeholder="Prix suggéré"/>
 
                         {/* Sous-composant pour sélectionner le genre */}
                         <GenreMusique oneGenreChange={setSelectedGenre} genreInitial={selectedGenre}/>
@@ -135,6 +140,7 @@ export default function CatalogueMusique() {
                     </form>
                 )}
             </div>
+
         </>
     )
 }

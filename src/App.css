@@ -42,20 +42,21 @@
 }
 
 /*pour les images*/
+/*ne pas supp*/
 .catalogue {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   max-width: 1000px;
-  margin: 0 auto;
-  gap: 20px; /* Ajoute de l'espace entre les cartes */
+  margin: auto;
+  gap: 20px;
 }
 
 .carte {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 10px; /* Réduit l'espace à l'intérieur des cartes */
-  width: 200px; /* Ajuste la largeur des cartes */
+  width: 400px; /* Ajuste la largeur des cartes */
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -93,7 +94,7 @@
 }
 
 .musique img {
-  max-width: 100%; /* S'assure que l'image ne dépasse pas le conteneur */
+  max-width: 100%;
   height: auto;
   border-radius: 5px;
 }
@@ -146,3 +147,166 @@ form button:hover {
   background-color: darkGray;
   color: Yellow;
 }
+body{
+  background: gray;
+}
+.catalogue {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.musique {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 250px;
+  text-align: center;
+}
+
+.musique img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.musique h2 {
+  font-size: 1.25rem;
+  margin: 12px 0;
+}
+
+.musique p {
+  margin: 6px 0;
+}
+button {
+  margin-top: 10px;
+}
+form {
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 20px auto; /* Centrer le formulaire */
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+form input, form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+form button:hover {
+  background-color: #0056b3;
+}
+.cardZik {
+  background-color: darkGray;
+  color: Yellow;
+}
+.formulaire{
+  position: absolute;
+  right: 10px;
+  top: 20%;
+  width: 500px;
+}
+
+.navbar{
+  width: 100%;
+
+}
+/* Global style */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style de la navbar */
+.navbar {
+  display: flex;
+  justify-content: center;
+  background-color: #333;
+  padding: 10px;
+}
+
+/* Style des boutons de la navbar */
+.navbar-btn {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-btn:hover {
+  background-color: #575757;
+}
+
+.navbar-btn.active {
+  background-color: #555;
+  color: #fff;
+}
+
+/* Centrer le contenu */
+.contenu {
+  padding: 20px;
+  text-align: center;
+}
+
+/* Titre */
+h1 {
+  text-align: center;
+  color: #333;
+}
+/*statisstques*/
+.statistiques {
+  padding: 20px;
+  background-color: #f8f9fa; /* Couleur d'arrière-plan */
+  border-radius: 8px;
+}
+
+.musique-catalogue {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  gap: 50px; /* Ajoute de l'espace entre les cartes */
+}
+
+.musique-carte {
+
+   /* Largeur fixe pour les cartes */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre */
+  transition: transform 0.2s; /* Effet de transition */
+}
+
+.musique-carte:hover {
+  transform: scale(1.05); /* Effet de zoom au survol */
+}
+.theme:hover {
+  transform: scale(1.05); /* Effet de zoom au survol */
+}
+
+
+
