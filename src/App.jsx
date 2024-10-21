@@ -21,6 +21,11 @@ function App() {
         return storedMusiques ? JSON.parse(storedMusiques) : catalogueMusiques;
     });
 
+    const critiquesState= useState(() => {
+        const storedCritiques = localStorage.getItem("critiques");
+        return storedCritiques ? JSON.parse(storedCritiques) : [];
+    });
+
     // État pour gérer la vue courante
     const [vueActuelle, setVueActuelle] = useState('musique');
 
@@ -35,9 +40,9 @@ function App() {
     if (vueActuelle === 'musique') {
         contenuAffiche = <CatalogueMusique musiqueState={musiqueState}/>;
     } else if (vueActuelle === 'critique') {
-        contenuAffiche = <CritiqueCatalogue musiqueState={musiqueState} />;
+        contenuAffiche = <CritiqueCatalogue musiqueState={musiqueState} critiquesState={critiquesState} />;
     } else if (vueActuelle === 'statistiques') {
-        contenuAffiche = <Statistiques musiqueState={musiqueState}/>;
+        contenuAffiche = <Statistiques musiqueState={musiqueState} critiquesState={critiquesState}/>;
     }
 
 

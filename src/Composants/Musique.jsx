@@ -2,7 +2,10 @@
 export default function Musique({src, nom, date, auteur, prix,genre}) {
     // Vérifier si la date est un objet Date, sinon créer une nouvelle date à partir de la chaîne
     // eslint-disable-next-line react/prop-types
-    const formattedDate = date instanceof Date ? date.toLocaleDateString() : new Date(date).toLocaleDateString();
+    const formattedDate = new Date(date).toLocaleDateString('fr-CA', {
+        timeZone: 'UTC',
+    });
+
     return (
         <>
             <div className="carte">

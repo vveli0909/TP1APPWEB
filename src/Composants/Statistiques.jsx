@@ -1,19 +1,45 @@
 import React, { useState } from 'react';
 import Musique from "./Musique.jsx";
-export default function Statistiques({ musiqueState }) {
+
+export default function Statistiques({ musiqueState, critiquesState }) {
     const [etatZik] = musiqueState;
     const [sortType, setSortType] = useState('average');
+
+    // Fonction pour calculer les moyennes des critiques pour chaque musique
+    const calculerMoyennesCritiques = (musiqueId) => {
+        const critiquesPourMusique = critiquesState.filter(critique => critique.idMusique === musiqueId);
+        const nbCritiques = critiquesPourMusique.length;
+
+        if (nbCritiques === 0) return { flow: 0, lyrics: 0, cover: 0 };
+
+        const totalFlow = critiquesPourMusique.reduce((total, critique) => total + (critique.flow || 0), 0);
+        const totalLyrics = critiquesPourMusique.reduce((total, critique) => total + (critique.lyrics || 0), 0);
+        const totalCover = critiquesPourMusique.reduce((total, critique) => total + (critique.cover || 0), 0);
+
+        return {
+            flow: totalFlow / nbCritiques,
+            lyrics: totalLyrics / nbCritiques,
+            cover: totalCover / nbCritiques
+        };
+    };
+
+    // Fonction de tri en fonction du critère sélectionné
     const trierPar = (criteria) => {
         return [...etatZik].sort((a, b) => {
+            const moyennesA = calculerMoyennesCritiques(a.id);
+            const moyennesB = calculerMoyennesCritiques(b.id);
+
             switch (criteria) {
                 case 'flow':
-                    return b.flow - a.flow;
+                    return moyennesB.flow - moyennesA.flow;
                 case 'lyrics':
-                    return b.lyrics - a.lyrics;
+                    return moyennesB.lyrics - moyennesA.lyrics;
                 case 'cover':
-                    return b.cover - a.cover;
+                    return moyennesB.cover - moyennesA.cover;
                 case 'average':
-                    return (b.flow + b.lyrics + b.cover) / 3 - (a.flow + a.lyrics + a.cover) / 3;
+                    const moyenneA = (moyennesA.flow + moyennesA.lyrics + moyennesA.cover) / 3;
+                    const moyenneB = (moyennesB.flow + moyennesB.lyrics + moyennesB.cover) / 3;
+                    return moyenneB - moyenneA;
                 case 'prix':
                     return a.prix - b.prix;
                 case 'date':
@@ -23,7 +49,9 @@ export default function Statistiques({ musiqueState }) {
             }
         });
     };
+
     const musiquesTriees = trierPar(sortType);
+
     return (
         <div className="statistiques">
             <h2>Statistiques des Musiques</h2>
@@ -53,11 +81,10 @@ export default function Statistiques({ musiqueState }) {
                                 auteur={musique.auteur}
                                 prix={musique.prix}
                                 genre={musique.genre}
-                                flow={musique.flow}
-                                lyrics={musique.lyrics}
-                                cover={musique.cover}
+                                flow={calculerMoyennesCritiques(musique.id).flow}
+                                lyrics={calculerMoyennesCritiques(musique.id).lyrics}
+                                cover={calculerMoyennesCritiques(musique.id).cover}
                             />
-
                         </div>
                     ))}
                 </div>

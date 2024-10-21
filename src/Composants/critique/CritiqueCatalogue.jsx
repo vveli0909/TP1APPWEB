@@ -4,11 +4,8 @@ import CritiqueForm from "./CritiqueForm";
 import CritiqueItem from "./CritiqueItem";
 
 
-export default function CritiqueCatalogue({ musiqueState }) {
-    const [critiques, setCritiques] = useState(() => {
-        const storedCritiques = localStorage.getItem("critiques");
-        return storedCritiques ? JSON.parse(storedCritiques) : [];
-    });
+export default function CritiqueCatalogue({ musiqueState,critiquesState }) {
+    const [critiques, setCritiques] = critiquesState
     const [filtreMusique, setFiltreMusique] = useState("");
 
     useEffect(() => {
